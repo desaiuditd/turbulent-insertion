@@ -68,16 +68,58 @@ void insert_at_tail( int value ) {
 // insert_at_position
 void insert_at_position( int position, int value ) {
 
+    if ( head == NULL ) {
+        struct node *new_node = get_new_node( value );
+        head = new_node;
+        return;
+    }
+
+    if ( position == 1 ) {
+        insert_at_head( value );
+        return;
+    } else {
+
+        struct node *temp = head;
+        int i = 1;
+        while ( temp->next != NULL && i != position - 1 )  {    // This loop will take 'temp' to the value of position
+            temp = temp->next;
+            i++;
+        }
+
+        // temp is at position-1 value. one node before the needed position.
+        struct node *new_node = get_new_node( value );
+        new_node->next = temp->next;
+        new_node->prev = temp;
+        temp->next->prev = new_node;
+        temp-> next = new_node;
+    }
 }
 
 // remove_from_position
 void remove_from_position( int position ) {
+    int i = 1;
+    struct node *temp = head;
+    while ( temp->next != NULL && i != position - 1 ) {     // This loop will take 'temp' to the value of position
+        temp = temp->next;
+        i++;
+    }
 
+    // temp is at position-1 value. one node before the needed position.
+    stuct node *removal = temp->next;
+    removal->next->prev = temp;
+    temp->next = removal->next;
+
+    free( removal );
 }
 
 // print
 void print_list() {
-
+    struct node *temp = head;
+	while( temp != NULL ) {
+		printf( "%d ", temp->data );
+		temp = temp->next;
+	}
+	printf( "\n" );
 }
 
 // sort - insertion sort
