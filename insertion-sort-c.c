@@ -10,5 +10,7 @@
 #include "linked-list.h"
 
 int main() {
-	printf( "Hello World\n" );
+	// initializing head pointer with null;
+	head = NULL;
+
 }

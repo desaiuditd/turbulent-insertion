@@ -4,6 +4,7 @@
  * Which I will use in Insertion Sort Program.
  */
 
+#include <stdlib.h>
 
 // Single Node Structure for a Linked List
 struct node {
@@ -13,7 +14,7 @@ struct node {
     struct node *next;
     // address for previous node
     struct node *prev;
-}
+};
 
 // address for head node. Global Object.
 struct node *head;
@@ -24,6 +25,7 @@ struct node * get_new_node( int value ) {
     new_node->data = value;
     new_node->next = NULL;
     new_node->prev = NULL;
+    return new_node;
 }
 
 // insert_at_head
@@ -97,6 +99,18 @@ void insert_at_position( int position, int value ) {
 
 // remove_from_position
 void remove_from_position( int position ) {
+
+    if ( head == NULL ) {
+        return;
+    }
+
+    if ( position == 1 ) {
+        struct node *removal = head;
+        head = head->next;
+        free( removal );
+        return;
+    }
+
     int i = 1;
     struct node *temp = head;
     while ( temp->next != NULL && i != position - 1 ) {     // This loop will take 'temp' to the value of position
@@ -104,10 +118,18 @@ void remove_from_position( int position ) {
         i++;
     }
 
+    // end the function because temp is the last node. You can't go ahead.
+    if ( temp->next == NULL ) {
+        return;
+    }
+
     // temp is at position-1 value. one node before the needed position.
-    stuct node *removal = temp->next;
-    removal->next->prev = temp;
+    struct node *removal = temp->next;
     temp->next = removal->next;
+
+    // If removal is not the last node then it has the next node and we need to link it back.
+    if ( removal->next != NULL )
+        removal->next->prev = temp;
 
     free( removal );
 }
