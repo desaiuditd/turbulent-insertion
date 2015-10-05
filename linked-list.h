@@ -165,20 +165,20 @@ void sort_list() {
         return;
     }
 
-    struct node *outerLoop = head->next;
+    struct node *outer_loop = head->next;
 
-    while ( outerLoop != NULL ) {
+    while ( outer_loop != NULL ) {
 
-        int key = outerLoop->data;
-        struct node *innerLoop = outerLoop;
+        int key = outer_loop->data;
+        struct node *inner_loop = outer_loop;
 
-        while ( innerLoop->prev != NULL && innerLoop->prev->data > key ) {
-            innerLoop->data = innerLoop->prev->data;
-            innerLoop = innerLoop->prev;
+        while ( inner_loop->prev != NULL && inner_loop->prev->data > key ) {
+            inner_loop->data = inner_loop->prev->data;
+            inner_loop = inner_loop->prev;
         }
 
-        innerLoop->data = key;
+        inner_loop->data = key;
 
-        outerLoop = outerLoop->next;
+        outer_loop = outer_loop->next;
     }
 }
