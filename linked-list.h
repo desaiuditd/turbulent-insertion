@@ -28,6 +28,20 @@ struct node * get_new_node( int value ) {
     return new_node;
 }
 
+// get the length of linked list
+int get_legnth() {
+    int len = 0;
+
+    struct node *temp = head;
+
+    while ( temp != NULL ) {      // This loop will take 'temp' to the end of the list
+        temp = temp->next;
+        len++;
+    }
+
+    return len;
+}
+
 // insert_at_head
 void insert_at_head( int value ) {
     struct node *new_node = get_new_node( value );
@@ -147,4 +161,24 @@ void print_list() {
 // sort - insertion sort
 void sort_list() {
 
+    if ( head == NULL || head->next == NULL ) {
+        return;
+    }
+
+    struct node *outerLoop = head->next;
+
+    while ( outerLoop != NULL ) {
+
+        int key = outerLoop->data;
+        struct node *innerLoop = outerLoop;
+
+        while ( innerLoop->prev != NULL && innerLoop->prev->data > key ) {
+            innerLoop->data = innerLoop->prev->data;
+            innerLoop = innerLoop->prev;
+        }
+
+        innerLoop->data = key;
+
+        outerLoop = outerLoop->next;
+    }
 }

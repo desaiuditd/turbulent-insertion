@@ -21,7 +21,7 @@ int main() {
 
 	scanf( " %d", &n );
 
-	printf("\nGenerating %d random numbers to test the Insertion Sort algorithm ....\n", n );
+	printf("\nGenerating %d random numbers to test the Insertion Sort algorithm ....\n\n", n );
 
 	// if total numbers are n then program will generate random numbers of n digits each.
 
@@ -31,5 +31,14 @@ int main() {
 		insert_at_tail( rand() % limit );
 	}
 
+	// printing random numbers array
+	printf("Unsorted Array: " );
+	print_list();
+
+	// sort the numbers in the list
+	sort_list();
+
+	// printing sorted list
+	printf("Sorted Array: " );
 	print_list();
 }
