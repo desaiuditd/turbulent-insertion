@@ -8,6 +8,7 @@
 
 #include <stdio.h>
 #include <math.h>
+#include <time.h>
 #include "linked-list.h"
 
 int main() {
@@ -31,14 +32,20 @@ int main() {
 		insert_at_tail( rand() % limit );
 	}
 
-	// printing random numbers array
-	printf("Unsorted Array: " );
-	print_list();
+	printf( "Unsorted Array is generated. Now array is getting sorted with Insertion Sort ....\n\n" );
+
+	time_t start,end;
+	double diff;
+
+	time( &start );
 
 	// sort the numbers in the list
 	sort_list();
 
-	// printing sorted list
-	printf("Sorted Array: " );
-	print_list();
+	time( &end );
+	diff = difftime( end, start );
+
+	printf( "The array is sorted!\n" );
+
+	printf( "It took %.4lf seconds to sort the array.\n", diff );
 }
